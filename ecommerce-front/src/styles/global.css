@@ -1,0 +1,20 @@
+* {
+   box-sizing: border-box !important;
+}
+
+:root {
+   --mainColor: #29b6f6;
+}
+
+body {
+   margin: 0;
+   padding: 0;
+}
+
+#mainHeader a.MuiButtonBase-root.active {
+   color: #26c6da;
+}
+
+.MuiDrawer-paper .MuiListItem-root .MuiListItemButton-root.active {
+   background-color: #9e9e9e14;
+}
