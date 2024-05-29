@@ -4,6 +4,8 @@ import { actGetProductsByCatPrefix, productsCleanUp } from "@store/products/prod
 import Grid from '@mui/material/Grid'
 import { Product } from "@components/eCommerce";
 import { useParams } from "react-router-dom";
+import { Loading } from "@components/feedback";
+import { GridList } from "@components/common";
 
 export default function Products()
 {
@@ -22,22 +24,18 @@ export default function Products()
 
    }, [dispatch, prefix]);
 
-   const productsList = records.length > 0 ?
-      records.map(record => (
-         <Grid item xs={6} sm={4} md={3} key={record.id}
-            display="flex" justifyContent="center"
-         >
-            <Product {...record} />
-         </Grid>
-      )) : "There are no products";
-
    return (
       <Grid container
          rowSpacing="25px"
          columnSpacing={{ xs: "15px", sm: "25px" }}
          pb={6}
       >
-         {productsList}
+         <Loading status={loading} error={error}>
+            <GridList
+               records={records}
+               renderItem={(record) => <Product {...record} />}
+            />
+         </Loading>
       </Grid>
    )
 }
