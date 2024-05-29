@@ -5,10 +5,18 @@ import
 } from '@mui/material';
 import DarkModeBtn from '../Header/DarkModeBtn/DarkModeBtn';
 import { NavLink } from 'react-router-dom';
+import { TSetFunc } from '@customTypes/shared';
+
+interface IProps
+{
+   handleDrawerToggle: () => void,
+   setMyMode: TSetFunc,
+   mobileOpen: boolean,
+}
 
 const drawerWidth = 240;
 
-export default function DrawerAppBar({ handleDrawerToggle, setMyMode, mobileOpen })
+export default function DrawerAppBar({ handleDrawerToggle, setMyMode, mobileOpen }: IProps)
 {
 
    return (

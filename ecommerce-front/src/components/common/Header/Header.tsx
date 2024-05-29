@@ -1,13 +1,18 @@
-import { HeaderBasket } from '@components/eCommerce';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+// MUI
 import { Typography, AppBar, Toolbar, Box, Button, IconButton } from '@mui/material';
 import { blueGrey, cyan } from '@mui/material/colors';
-import { NavLink } from 'react-router-dom';
-import DarkModeBtn from './DarkModeBtn/DarkModeBtn';
 import MenuIcon from '@mui/icons-material/Menu';
+// Components & types
+import DarkModeBtn from './DarkModeBtn/DarkModeBtn';
+import DrawerAppBar from '../DrawerAppBar/DrawerAppBar';
+import { TSetFunc } from '@customTypes/shared';
+import { HeaderBasket } from '@components/eCommerce';
 // Styles
 import styles from './styles.module.css';
-import { useState } from 'react';
-import DrawerAppBar from '../DrawerAppBar/DrawerAppBar';
+
+type TSetMode = { setMyMode: TSetFunc }
 
 const navBtnOverrides = {
    color: "#F2F2F2",
@@ -19,7 +24,7 @@ const navBtnOverrides = {
 
 const { badge } = styles;
 
-export default function Header({ setMyMode })
+export default function Header({ setMyMode }: TSetMode)
 {
    const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -60,7 +65,7 @@ export default function Header({ setMyMode })
                      aria-label="open drawer"
                      edge="end"
                      onClick={handleDrawerToggle}
-                     sx={{ display: { sm: 'none' } }}
+                     sx={{ display: { sm: 'none' }, ml: "auto" }}
                   >
                      <MenuIcon />
                   </IconButton>

@@ -1,8 +1,10 @@
 import { LightModeSharp, DarkModeOutlined } from '@mui/icons-material';
 import { IconButton, useTheme } from '@mui/material';
+import { TSetFunc } from '@customTypes/shared';
 
+type TSetMode = { setMyMode: TSetFunc }
 
-function DarkModeBtn({ setMyMode })
+function DarkModeBtn({ setMyMode }: TSetMode)
 {
    const theme = useTheme();
    const currentMode = theme.palette.mode;

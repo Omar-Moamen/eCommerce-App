@@ -20,7 +20,11 @@ const router = createBrowserRouter([{
          element: <Home />,
       },
       {
-         path: "products/:prefix",
+         path: "categories",
+         element: <Categories />,
+      },
+      {
+         path: "categories/products/:prefix",
          element: <Products />,
          loader: ({ params }) =>
          {
@@ -37,10 +41,7 @@ const router = createBrowserRouter([{
             return true;
          }
       },
-      {
-         path: "categories",
-         element: <Categories />,
-      },
+
       {
          path: "about-us",
          element: <AboutUs />,
