@@ -1,5 +1,5 @@
 import { TError, TLoading } from "@customTypes/shared"
-import { Typography } from "@mui/material"
+import { CircularProgress, Typography } from "@mui/material"
 
 interface LoadingProps
 {
@@ -13,10 +13,13 @@ export default function Loading({ status, error, children }: LoadingProps)
    if (status === "pending")
    {
       return (
-         <Typography fontSize="20px" pt="50px" mx="auto"
-         >
-            loading...
-         </Typography>
+         <CircularProgress color="info"
+            sx={{
+               position: "absolute",
+               top: "calc(50% - 20px)",
+               left: "calc(50% - 20px)",
+            }}
+         />
       )
    }
    if (status === "error")

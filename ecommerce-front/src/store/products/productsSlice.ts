@@ -52,5 +52,4 @@ const productsSlice = createSlice({
 
 
 export const { productsCleanUp } = productsSlice.actions;
-export { actGetProductsByCatPrefix }
 export default productsSlice.reducer;

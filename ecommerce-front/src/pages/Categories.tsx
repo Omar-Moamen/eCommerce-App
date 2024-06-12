@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { actGetCategories } from '@store/categories/categoriesSlice';
+import actGetCategories from '@store/categories/act/actGetCategories';
 
 import { Category } from "@components/eCommerce"
 import { Grid } from "@mui/material"

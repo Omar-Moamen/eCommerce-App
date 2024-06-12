@@ -1,13 +1,58 @@
 import { TProduct } from "@customTypes/product";
-import { Button, Card, CardActions, CardContent, CardMedia, Typography, useTheme } from "@mui/material";
-import { red } from "@mui/material/colors";
-
-
-
-export default function Product({ id, title, cat_prefix, img, price }: TProduct)
+import
 {
+   Button, Card, CardActions, CardContent,
+   CardMedia, CircularProgress, Typography, useTheme
+}
+   from "@mui/material";
+import { red } from "@mui/material/colors";
+import { addToCart } from "@store/cart/cartSlice";
+import { useAppDispatch } from "@store/hooks";
+import { memo, useEffect, useState } from "react";
+// Styles
+import styles from './styles.module.css';
+
+const { productTitle, disabledSpinner } = styles
+
+const Product = memo(({ id, title, img, price, max, quantity }: TProduct) =>
+{
+   // MUI
    const theme = useTheme();
    const currentMode = theme.palette.mode;
+
+   const dispatch = useAppDispatch();
+   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+
+   const currentRemainingQuantity = max - (quantity ?? 0);
+   const quantityReachedToMax = currentRemainingQuantity <= 0 ? true : false;
+
+   const quantityReachedToMaxMsg = quantityReachedToMax ?
+      "Reached your limit" : `Remaining today: ${currentRemainingQuantity}`;
+
+   const feedbackColor = quantityReachedToMax ? "error" : "initial";
+
+   // Effects
+   useEffect(() =>
+   {
+      // If the button wasn't clicked stop useEffect
+      if (!isBtnDisabled)
+      {
+         return;
+      }
+
+      const debounce = setTimeout(() =>
+      {
+         setIsBtnDisabled(false);
+      }, 300)
+
+      return () => clearTimeout(debounce);
+   }, [isBtnDisabled])
+
+   const addToCartHandler = () =>
+   {
+      dispatch(addToCart(id))
+      setIsBtnDisabled(true);
+   }
 
    return (
       <Card sx={{ maxWidth: { xs: "345px", md: "300px" } }}
@@ -20,7 +65,9 @@ export default function Product({ id, title, cat_prefix, img, price }: TProduct)
             image={img}
          />
          <CardContent sx={{ pb: 0 }}>
-            <Typography variant="subtitle1" fontWeight="bold" component="h3">
+            <Typography title={title} className={productTitle}
+               variant="subtitle1" fontWeight="bold" component="h3"
+            >
                {title}
             </Typography>
 
@@ -28,16 +75,38 @@ export default function Product({ id, title, cat_prefix, img, price }: TProduct)
                Amazing fashion shirt for summer
             </Typography>
 
-            <Typography fontSize="inherit" fontWeight="bold" component="span"
+            <Typography
+               className="quantity-reached-max"
+               fontSize="13px"
+               display="block"
+               component="span" color={feedbackColor}>
+               {quantityReachedToMaxMsg}
+            </Typography>
+
+            <Typography fontSize={{ xs: "13px", sm: "16px" }} fontWeight="bold" component="span"
                color={currentMode === "light" ? red[500] : "primary"}
             >
-               {`${price} EGP`}
+               {`${price.toFixed(2)} EGP`}
             </Typography>
 
          </CardContent>
-         <CardActions sx={{ display: "flex", justifyContent: "end", pt: 0 }}>
-            <Button size="small">Add to cart</Button>
+         <CardActions
+            sx={{
+               display: "flex", justifyContent: "end",
+               marginTop: "auto", pt: 0
+            }}
+         >
+            <Button
+               size="small"
+               disabled={isBtnDisabled || quantityReachedToMax}
+               onClick={addToCartHandler}
+            >
+               Add to cart
+               {isBtnDisabled && <CircularProgress className={disabledSpinner} size={20} />}
+            </Button>
          </CardActions>
-      </Card>
+      </Card >
    )
-}
+});
+
+export default Product;

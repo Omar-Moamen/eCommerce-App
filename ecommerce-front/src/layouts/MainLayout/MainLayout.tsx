@@ -23,6 +23,7 @@ function MainLayout()
             height: "100vh",
             display: "flex",
             flexDirection: "column",
+            position: "relative",
          }}
          >
             <Header setMyMode={setMyMode} />

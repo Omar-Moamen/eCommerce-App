@@ -9,8 +9,6 @@ import DarkModeBtn from './DarkModeBtn/DarkModeBtn';
 import DrawerAppBar from '../DrawerAppBar/DrawerAppBar';
 import { TSetFunc } from '@customTypes/shared';
 import { HeaderBasket } from '@components/eCommerce';
-// Styles
-import styles from './styles.module.css';
 
 type TSetMode = { setMyMode: TSetFunc }
 
@@ -22,7 +20,6 @@ const navBtnOverrides = {
    }
 };
 
-const { badge } = styles;
 
 export default function Header({ setMyMode }: TSetMode)
 {
@@ -35,16 +32,22 @@ export default function Header({ setMyMode }: TSetMode)
 
    return (
       <>
-         <header id='mainHeader' style={{ padding: "30px 0 10px" }}>
+         <header id='mainHeader' style={{ paddingTop: "30px" }}>
             <Box
                display="flex"
                alignItems="center"
                justifyContent="space-between"
-               mb="15px"
+               mb={{ xs: "8px", md: "15px" }}
                height="50px"
             >
-               <Typography fontWeight={"bold"} variant='h4' component={"h1"}>
-                  Our<span className={badge}>Ecom</span>
+               <Typography
+                  fontSize={{ xs: "20px", sm: "26px", md: "34px" }}
+                  component={"h1"}
+                  textTransform="uppercase"
+                  fontWeight="bold"
+                  color={blueGrey[800]}
+               >
+                  E-<span style={{ color: "#F4511E" }}>commerce</span>
                </Typography>
 
                <HeaderBasket />

@@ -12,8 +12,8 @@ export default function Category({ title, prefix, img }: TCategory)
             onClick={() => navigate(`/categories/products/${prefix}`)}
          >
             <Card sx={{
-               width: { xs: "150px", md: "180px" },
-               height: { xs: "150px", md: "180px" },
+               width: { xs: "115px", sm: "150px", md: "180px" },
+               height: { xs: "115px", sm: "150px", md: "180px" },
                borderRadius: "50%", textAlign: "center"
             }}
             >

@@ -44,5 +44,4 @@ const categoriesSlice = createSlice({
    }
 })
 
-export { actGetCategories };
 export default categoriesSlice.reducer;

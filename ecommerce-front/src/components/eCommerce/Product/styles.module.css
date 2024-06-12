@@ -1,0 +1,13 @@
+.productTitle {
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+.disabledSpinner {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   margin-top: -10px;
+   margin-left: -10px;
+}
