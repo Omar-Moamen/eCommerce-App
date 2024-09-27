@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "@store/hooks";
 import actGetCategories from '@store/categories/act/actGetCategories';
 
 import { Category } from "@components/eCommerce"
-import { Grid } from "@mui/material"
+import { Container, Grid } from "@mui/material"
 import { Loading } from "@components/feedback";
 import { GridList } from "@components/common";
 
@@ -23,18 +23,19 @@ export default function Categories()
    }, [dispatch, records]);
 
    return (
-      <Grid container
-         rowSpacing="25px"
-         columnSpacing={{ xs: 0, sm: "25px" }}
-         pb={6}
-      >
-         <Loading status={loading} error={error}>
-            <GridList
-               records={records}
-               renderItem={(record) => <Category {...record} />}
-            />
-         </Loading>
-      </Grid>
+      <Container className="pageMinHeight" maxWidth="xl" sx={{ pt: "20px" }}>
+         <Grid container
+            rowSpacing="25px"
+            columnSpacing={{ xs: 0, sm: "25px" }}
+         >
+            <Loading status={loading} error={error}>
+               <GridList
+                  records={records}
+                  renderItem={(record) => <Category {...record} />}
+               />
+            </Loading>
+         </Grid>
+      </Container>
    )
 }
 

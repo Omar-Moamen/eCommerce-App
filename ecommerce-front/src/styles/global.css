@@ -3,7 +3,8 @@
 }
 
 :root {
-   --mainColor: #29b6f6;
+   --main_height: calc(100vh - 215px);
+   --main_padding: 50px;
 }
 
 body {
@@ -13,6 +14,22 @@ body {
 
 #mainHeader a.MuiButtonBase-root.active {
    color: #26c6da;
+}
+
+.pageMinHeight {
+   min-height: var(--main_height);
+}
+
+.MuiContainer-root[class*="mainPx"] {
+   padding-left: var(--main_padding) !important;
+   padding-right: var(--main_padding) !important;
+}
+
+@media(max-width: 600px) {
+   .MuiContainer-root[class*="mainPx"] {
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+   }
 }
 
 .MuiDrawer-paper .MuiListItem-root .MuiListItemButton-root.active {

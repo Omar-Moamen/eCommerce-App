@@ -6,6 +6,7 @@ import { getCartTotalQuantitySelector } from '@store/cart/selectors';
 // Styles
 import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const { basket, basketQuantity, pumpCartQuantity } = styles;
 
@@ -14,6 +15,8 @@ const HeaderBasket = () =>
    const totalQuantity = useAppSelector(getCartTotalQuantitySelector);
    const [isAnimate, setIsAnimate] = useState(false);
    const quantityStyle = `${basketQuantity} ${isAnimate ? pumpCartQuantity : ""}`;
+
+   const navigate = useNavigate();
 
    useEffect(() =>
    {
@@ -38,6 +41,7 @@ const HeaderBasket = () =>
          <IconButton sx={{ position: "relative" }}
             size="small"
             aria-label="shopping-cart-button"
+            onClick={() => navigate('/cart')}
          >
             <ShoppingCartOutlinedIcon sx={{
                display: "block",
@@ -47,9 +51,8 @@ const HeaderBasket = () =>
          <Typography
             className={quantityStyle}
             component="span"
-            fontSize={"12px"}
-            lineHeight={"18px"}
-            color={"common.white"}
+            fontSize="12px"
+            lineHeight="18px"
             bgcolor={deepOrange[600]}
          >
             {totalQuantity}

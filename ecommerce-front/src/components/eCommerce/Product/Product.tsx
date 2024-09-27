@@ -2,23 +2,21 @@ import { TProduct } from "@customTypes/product";
 import
 {
    Button, Card, CardActions, CardContent,
-   CardMedia, CircularProgress, Typography, useTheme
+   CardMedia, CircularProgress, Typography
 }
    from "@mui/material";
-import { red } from "@mui/material/colors";
 import { addToCart } from "@store/cart/cartSlice";
 import { useAppDispatch } from "@store/hooks";
 import { memo, useEffect, useState } from "react";
 // Styles
 import styles from './styles.module.css';
+import useCurrentMode from "@hooks/use-current-mode";
 
 const { productTitle, disabledSpinner } = styles
 
 const Product = memo(({ id, title, img, price, max, quantity }: TProduct) =>
 {
-   // MUI
-   const theme = useTheme();
-   const currentMode = theme.palette.mode;
+   const { priceColor } = useCurrentMode();
 
    const dispatch = useAppDispatch();
    const [isBtnDisabled, setIsBtnDisabled] = useState(false);
@@ -29,7 +27,7 @@ const Product = memo(({ id, title, img, price, max, quantity }: TProduct) =>
    const quantityReachedToMaxMsg = quantityReachedToMax ?
       "Reached your limit" : `Remaining today: ${currentRemainingQuantity}`;
 
-   const feedbackColor = quantityReachedToMax ? "error" : "initial";
+   const feedbackColor = quantityReachedToMax ? "error" : "inherit";
 
    // Effects
    useEffect(() =>
@@ -79,12 +77,17 @@ const Product = memo(({ id, title, img, price, max, quantity }: TProduct) =>
                className="quantity-reached-max"
                fontSize="13px"
                display="block"
-               component="span" color={feedbackColor}>
+               component="span"
+               color={feedbackColor}
+               mb="5px"
+            >
                {quantityReachedToMaxMsg}
             </Typography>
 
-            <Typography fontSize={{ xs: "13px", sm: "16px" }} fontWeight="bold" component="span"
-               color={currentMode === "light" ? red[500] : "primary"}
+            <Typography
+               fontSize={{ xs: "13px", sm: "16px" }}
+               fontWeight="bold" component="span"
+               color={priceColor}
             >
                {`${price.toFixed(2)} EGP`}
             </Typography>

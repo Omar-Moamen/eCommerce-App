@@ -5,7 +5,7 @@ import { store, persistor } from '@store/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 // Axios
-import "./services/axios-global.js";
+import "./services/axios-global.ts";
 // Styles
 import './styles/global.css';
 

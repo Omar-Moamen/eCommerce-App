@@ -1,5 +1,8 @@
 .footerContainer {
    text-align: center;
-   padding: 10px 0;
+   height: 45px;
    margin-top: auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }

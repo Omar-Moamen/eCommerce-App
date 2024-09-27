@@ -15,10 +15,12 @@ export default function GridList<T extends HasId>({ records, renderItem }: GridL
       <Grid
          key={record.id}
          item
-         xs={6} sm={4} md={3}
+         xs={6} sm={4} md={2.4}
          display="flex" justifyContent="center"
       >
-         {renderItem(record)}
+         {
+            renderItem(record)
+         }
       </Grid>
    )) : "There are no categories";
 

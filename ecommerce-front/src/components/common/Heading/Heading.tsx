@@ -8,7 +8,7 @@ function Heading({ children }: { children: React.ReactNode })
          fontWeight="bold"
          textTransform="capitalize"
          component="h2"
-         m="0 0 15px 5px"
+         m="0 0 15px 10px"
       >
          {children}
       </Typography>

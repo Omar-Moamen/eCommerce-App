@@ -1,0 +1,10 @@
+.subtotalContainer {
+   display: flex !important;
+   justify-content: space-between;
+   margin-bottom: 60px;
+}
+
+.subtotalContainer span {
+   display: block;
+   font-weight: bold;
+}

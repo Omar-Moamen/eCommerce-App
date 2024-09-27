@@ -9,10 +9,9 @@
    height: 18px;
    top: -5px;
    right: 2px;
-   background-color: var(--mainColor);
+   color: #FFF;
    border-radius: 50%;
    text-align: center;
-   font-size: 12px;
    -webkit-border-radius: 50%;
    -moz-border-radius: 50%;
    -ms-border-radius: 50%;

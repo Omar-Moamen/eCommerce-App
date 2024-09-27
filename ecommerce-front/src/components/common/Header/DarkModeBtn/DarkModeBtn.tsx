@@ -1,14 +1,18 @@
 import { LightModeSharp, DarkModeOutlined } from '@mui/icons-material';
-import { IconButton, useTheme } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { TSetFunc } from '@customTypes/shared';
+import useCurrentMode from '@hooks/use-current-mode';
 
 type TSetMode = { setMyMode: TSetFunc }
 
 function DarkModeBtn({ setMyMode }: TSetMode)
 {
-   const theme = useTheme();
-   const currentMode = theme.palette.mode;
-
+   const { currentMode } = useCurrentMode();
+   const themeToggleHandler = () =>
+   {
+      setMyMode(currentMode === "dark" ? "light" : "dark")
+      localStorage.setItem("currentMode", currentMode === "dark" ? "light" : "dark");
+   }
    return (
       <IconButton edge="end" aria-label="lightMode-on"
          sx={{
@@ -19,12 +23,7 @@ function DarkModeBtn({ setMyMode }: TSetMode)
             }
          }}
          color={currentMode === "dark" ? 'warning' : "inherit"}
-         onClick={() =>
-         {
-            localStorage.setItem("currentMode", currentMode === "dark" ? "light" : "dark");
-
-            setMyMode(currentMode === "dark" ? "light" : "dark")
-         }}
+         onClick={themeToggleHandler}
       >
          {
             currentMode === "dark" ?

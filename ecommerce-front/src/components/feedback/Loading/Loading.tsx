@@ -10,6 +10,7 @@ interface LoadingProps
 
 export default function Loading({ status, error, children }: LoadingProps)
 {
+
    if (status === "pending")
    {
       return (
@@ -25,8 +26,7 @@ export default function Loading({ status, error, children }: LoadingProps)
    if (status === "error")
    {
       return (
-         <Typography fontSize="20px" pt="50px" mx="auto" color="error.main"
-         >
+         <Typography fontSize="20px" pt="50px" mx="auto" color="error.main">
             {error}
          </Typography>
       )

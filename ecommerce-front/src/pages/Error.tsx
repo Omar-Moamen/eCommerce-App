@@ -22,14 +22,14 @@ export default function Error()
 
    return (
       <Container sx={{ textAlign: "center", paddingTop: "40px" }} maxWidth="md">
-         <Typography component={"h1"} fontSize={"140px"}
+         <Typography component="h1" fontSize="140px"
             mb="-15px" pt="15%"
          >
             {errorStatus}
          </Typography>
          <Typography fontSize="25px" color="error">{errorStatusText}</Typography>
          <Typography component={Link} display={"block"}
-            mt={"15px"} color={blue[700]}
+            mt="15px" color={blue[700]}
             to="/" replace={true}
          >
             How about going back to safety!

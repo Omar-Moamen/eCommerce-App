@@ -7,6 +7,7 @@ import { Product } from "@components/eCommerce";
 import { useParams } from "react-router-dom";
 import { Loading } from "@components/feedback";
 import { GridList, Heading } from "@components/common";
+import { Container } from "@mui/material";
 
 const Products = () =>
 {
@@ -34,13 +35,12 @@ const Products = () =>
    }, [dispatch, prefix]);
 
    return (
-      <>
+      <Container className="pageMinHeight mainPx" maxWidth="xl">
          <Heading><span>{prefix}</span>-products</Heading>
          <Loading status={loading} error={error}>
             <Grid container
                rowSpacing="25px"
-               columnSpacing={{ xs: "15px", sm: "25px" }}
-               pb={6}
+               columnSpacing={{ xs: "15px", sm: "15px" }}
             >
                <GridList
                   records={productInfo}
@@ -48,7 +48,7 @@ const Products = () =>
                />
             </Grid>
          </Loading>
-      </>
+      </Container>
    )
 };
 
