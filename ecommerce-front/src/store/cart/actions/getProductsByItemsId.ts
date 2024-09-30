@@ -5,7 +5,7 @@ import axios from 'axios';
 
 type TResponse = TProduct[];
 
-export const actGetProductsByItems = createAsyncThunk("cart/actGetProductsByItems",
+export const getProductsByItemsId = createAsyncThunk("cart/getProductsByItemsId",
    async (_, thunkAPI) =>
    {
       const { rejectWithValue, fulfillWithValue, getState } = thunkAPI;
@@ -13,7 +13,7 @@ export const actGetProductsByItems = createAsyncThunk("cart/actGetProductsByItem
       const itemsIds = Object.keys(cart.items);
       const concatenatedItemsIds = itemsIds.map(id => (`id=${id}`)).join('&');
 
-      // If there are no items in the cart, the request won't fire to get products
+      // If there are no items in the cart, the request won't fire to get products by items ids
       if (!itemsIds.length)
       {
          return fulfillWithValue([]);
@@ -23,7 +23,8 @@ export const actGetProductsByItems = createAsyncThunk("cart/actGetProductsByItem
       {
          const response = await axios.get<TResponse>(`/products?${concatenatedItemsIds}`);
          return response.data;
-      } catch (error)
+      }
+      catch (error)
       {
          if (axios.isAxiosError(error))
          {

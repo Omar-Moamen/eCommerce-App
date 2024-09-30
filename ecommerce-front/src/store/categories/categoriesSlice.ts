@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import actGetCategories from "./act/actGetCategories";
+import getCategories from "./actions/getCategories";
 import { TError, TLoading } from "@customTypes/shared";
 import { TCategory } from "@customTypes/category";
 
@@ -23,17 +23,17 @@ const categoriesSlice = createSlice({
    extraReducers: (builder) =>
    {
       builder
-         .addCase(actGetCategories.pending, (state) =>
+         .addCase(getCategories.pending, (state) =>
          {
             state.loading = "pending";
             state.error = null;
          })
-         .addCase(actGetCategories.fulfilled, (state, { payload }) => 
+         .addCase(getCategories.fulfilled, (state, { payload }) => 
          {
             state.loading = "succeeded";
             state.records = payload;
          })
-         .addCase(actGetCategories.rejected, (state, { payload }) =>
+         .addCase(getCategories.rejected, (state, { payload }) =>
          {
             state.loading = "error";
             if (payload && typeof payload === "string")

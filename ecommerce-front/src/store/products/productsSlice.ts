@@ -1,7 +1,7 @@
 import { TProduct } from "@customTypes/product";
 import { TLoading, TError } from "@customTypes/shared";
 import { createSlice } from "@reduxjs/toolkit";
-import actGetProductsByCatPrefix from "./act/actGetProductsByCatPrefix";
+import getProductsByCatPrefix from "./actions/getProductsByCatPrefix";
 
 interface IProductsState
 {
@@ -28,18 +28,18 @@ const productsSlice = createSlice({
    extraReducers: (builder) =>
    {
       builder
-         .addCase(actGetProductsByCatPrefix.pending, (state) =>
+         .addCase(getProductsByCatPrefix.pending, (state) =>
          {
             state.loading = "pending";
             state.error = null;
          })
-         .addCase(actGetProductsByCatPrefix.fulfilled, (state, { payload }) =>
+         .addCase(getProductsByCatPrefix.fulfilled, (state, { payload }) =>
          {
             state.loading = "succeeded";
             state.error = null;
             state.records = payload;
          })
-         .addCase(actGetProductsByCatPrefix.rejected, (state, { payload }) =>
+         .addCase(getProductsByCatPrefix.rejected, (state, { payload }) =>
          {
             state.loading = "error";
             if (payload && typeof payload === "string")

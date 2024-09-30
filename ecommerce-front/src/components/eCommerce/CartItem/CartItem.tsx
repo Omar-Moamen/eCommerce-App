@@ -4,11 +4,15 @@ import
    MenuItem, Select, Typography,
    SelectChangeEvent, Button,
    Divider
-} from "@mui/material"
-// Styles
-import styles from './styles.module.css';
+} from "@mui/material";
 import { TProduct } from "@customTypes/product";
 import useCurrentMode from "@hooks/use-current-mode";
+import { cartItemChangeQuantity, cartItemRemove } from "@store/cart/cartSlice";
+import { useAppDispatch } from "@store/hooks";
+import { memo } from "react";
+// Styles
+import styles from './styles.module.css';
+
 
 const {
    cartItem, product, productImg,
@@ -17,19 +21,29 @@ const {
 
 type TCartItemProps = TProduct;
 
-function CartItem({ title, img, price, max, quantity }: TCartItemProps)
+const CartItem = memo(({ id, title, img, price, max, quantity }: TCartItemProps) =>
 {
+   const dispatch = useAppDispatch();
+
    const { priceColor } = useCurrentMode();
 
+   // Array(max) without .fill(any) won't work because it'll be [empty x number] array
    const renderOptions = Array(max).fill(0).map((_, idx) =>
    {
-      const quantity = ++idx;
-      return <MenuItem key={quantity} value={quantity}>{quantity}</MenuItem>
+      const quantities = ++idx;
+      return <MenuItem key={`${quantities} ${idx}`} value={quantities}>{quantities}</MenuItem>
    })
+
+   // Handlers
+   const changeQuantityHandler = (id: number, quantity: number) =>
+   {
+      dispatch(cartItemChangeQuantity({ id, quantity }))
+   }
 
    const handleChange = (event: SelectChangeEvent) =>
    {
-      setQuantity(event.target.value);
+      const quantity = +event.target.value;
+      changeQuantityHandler(id, quantity);
    };
 
    return (
@@ -68,7 +82,7 @@ function CartItem({ title, img, price, max, quantity }: TCartItemProps)
 
                   </Select>
                </FormControl>
-               <Button variant="text" color="error" size="small">
+               <Button variant="text" color="error" size="small" onClick={() => dispatch(cartItemRemove(id))}>
                   Remove
                </Button>
             </Box>
@@ -77,5 +91,5 @@ function CartItem({ title, img, price, max, quantity }: TCartItemProps)
       </>
    )
 }
-
+)
 export default CartItem;

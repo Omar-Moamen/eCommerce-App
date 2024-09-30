@@ -7,6 +7,8 @@
       "DOM",
       "DOM.Iterable"
     ],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
     "module": "ESNext",
     "skipLibCheck": true,
     "types": [

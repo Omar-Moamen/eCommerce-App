@@ -21,11 +21,10 @@ const Product = memo(({ id, title, img, price, max, quantity }: TProduct) =>
    const dispatch = useAppDispatch();
    const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
-   const currentRemainingQuantity = max - (quantity ?? 0);
-   const quantityReachedToMax = currentRemainingQuantity <= 0 ? true : false;
+   const remainingQuantity = max - (quantity ?? 0);
+   const quantityReachedToMax = remainingQuantity <= 0 ? true : false;
 
-   const quantityReachedToMaxMsg = quantityReachedToMax ?
-      "Reached your limit" : `Remaining today: ${currentRemainingQuantity}`;
+   const quantityReachedToMaxMsg = quantityReachedToMax ? "Reached your limit" : `Remaining today: ${remainingQuantity}`;
 
    const feedbackColor = quantityReachedToMax ? "error" : "inherit";
 

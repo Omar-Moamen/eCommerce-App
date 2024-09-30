@@ -7,7 +7,7 @@ type TCartItemsListProps = {
 
 function CartItemsList({ products }: TCartItemsListProps)
 {
-   const renderList = products.map(el => <CartItem key={el.id} {...el} />)
+   const renderList = products.map(product => <CartItem key={product.id} {...product} />)
 
    return (
       <>

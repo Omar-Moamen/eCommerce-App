@@ -12,6 +12,22 @@ body {
    padding: 0;
 }
 
+.pt {
+   padding-top: var(--main_padding);
+}
+
+.pr {
+   padding-right: var(--main_padding);
+}
+
+.pb {
+   padding-bottom: var(--main_padding);
+}
+
+.pl {
+   padding-left: var(--main_padding);
+}
+
 #mainHeader a.MuiButtonBase-root.active {
    color: #26c6da;
 }

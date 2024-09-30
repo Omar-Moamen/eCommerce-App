@@ -1,7 +1,7 @@
 import { TProduct } from '@customTypes/product';
 import { TError, TLoading } from '@customTypes/shared';
 import { createSlice } from "@reduxjs/toolkit";
-import { actGetProductsByItems } from './act/actGetProductsByItems';
+import { getProductsByItemsId } from './actions/getProductsByItemsId';
 
 
 interface ICartState
@@ -29,32 +29,41 @@ const cartSlice = createSlice({
          // If the id already exists in the cart, We will increase its quantity 
          // else => the id doesn't exist, We will insert it
          state.items[id] ? state.items[id]++ : state.items[id] = 1
+      },
+      cartItemChangeQuantity: (state, {payload}) =>
+      {
+         state.items[payload.id] = payload.quantity;
+      },
+      cartItemRemove: (state, { payload }) =>
+      {
+         delete state.items[payload];
+         state.productsFullInfo = state.productsFullInfo.filter(el => el.id !== payload);
       }
    },
    extraReducers: (builder) =>
    {
       builder
-         .addCase(actGetProductsByItems.pending, (state) =>
+         .addCase(getProductsByItemsId.pending, (state) =>
          {
             state.loading = "pending";
             state.error = null;
          })
-         .addCase(actGetProductsByItems.fulfilled, (state, { payload }) =>
+         .addCase(getProductsByItemsId.fulfilled, (state, { payload }) =>
          {
             state.loading = "succeeded";
             state.productsFullInfo = payload;
             state.error = null;
          })
-         .addCase(actGetProductsByItems.rejected, (state, { payload }) =>
+         .addCase(getProductsByItemsId.rejected, (state, { payload }) =>
          {
             state.loading = "error";
             if (payload && typeof payload === "string")
             {
-               state.error = null;
+               state.error = payload;
             }
          })
    }
 })
 
-export const { addToCart } = cartSlice.actions;
-export default cartSlice.reducer
+export const { addToCart, cartItemChangeQuantity, cartItemRemove } = cartSlice.actions;
+export default cartSlice.reducer;

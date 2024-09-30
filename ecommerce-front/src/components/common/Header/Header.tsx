@@ -25,7 +25,7 @@ const containerStyles = {
    alignItems: "center",
    justifyContent: "space-between",
    mb: { xs: "8px", md: "15px" },
-   px: "50px", height: "50px"
+   px: "0 !important", height: "50px"
 }
 
 const toolbarStyles = {
@@ -45,7 +45,6 @@ function Header({ setMyMode }: TSetMode)
    return (
       <header id='mainHeader' style={{ paddingTop: "30px" }}>
          <Container
-            className="mainPx"
             maxWidth="xl"
             sx={containerStyles}
          >

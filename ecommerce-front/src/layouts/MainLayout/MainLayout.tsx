@@ -1,6 +1,6 @@
 import Header from "@components/common/Header/Header";
 import Footer from "@components/common/Footer/Footer";
-import { Box, CssBaseline } from '@mui/material';
+import { Box, CssBaseline, Container } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useMemo, useState } from "react";
 import { Outlet } from "react-router-dom";
@@ -19,11 +19,14 @@ function MainLayout()
    return (
       <ThemeProvider theme={darkTheme}>
          <CssBaseline />
-         <Header setMyMode={setMyMode} />
-         <Box mt="30px">
-            <Outlet />
-         </Box>
-         <Footer />
+         <Container maxWidth="xl">
+
+            <Header setMyMode={setMyMode} />
+            <Box mt="30px">
+               <Outlet />
+            </Box>
+            <Footer />
+         </Container>
       </ThemeProvider>
    )
 }

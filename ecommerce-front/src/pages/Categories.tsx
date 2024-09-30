@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
-import actGetCategories from '@store/categories/act/actGetCategories';
+import getCategories from '@store/categories/actions/getCategories';
 
 import { Category } from "@components/eCommerce"
 import { Container, Grid } from "@mui/material"
@@ -18,7 +18,7 @@ export default function Categories()
       // Because categories-page doesn't need to update quickly & constantly like products
       if (!records.length)
       {
-         dispatch(actGetCategories())
+         dispatch(getCategories())
       }
    }, [dispatch, records]);
 

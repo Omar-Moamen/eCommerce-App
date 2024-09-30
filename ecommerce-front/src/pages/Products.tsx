@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
-import actGetProductsByCatPrefix from "@store/products/act/actGetProductsByCatPrefix";
+import getProductsByCatPrefix from "@store/products/actions/getProductsByCatPrefix";
 import { productsCleanUp } from "@store/products/productsSlice";
 import Grid from '@mui/material/Grid';
 import { Product } from "@components/eCommerce";
@@ -12,20 +12,21 @@ import { Container } from "@mui/material";
 const Products = () =>
 {
    const { prefix } = useParams();
+
    const dispatch = useAppDispatch();
    const { loading, error, records } = useAppSelector(state => state.products);
-
-   const cartItems = useAppSelector(state => state.cart.items);
+   const { items } = useAppSelector(state => state.cart);
    // Get the quantity of each item in the cart by its id
-   const productInfo = records.map(el => (
+   const productInfo = records.map(product => (
       {
-         ...el,
-         quantity: cartItems[el.id] || 0,
+         ...product,
+         quantity: items[product.id] || 0,
       }))
+
 
    useEffect(() =>
    {
-      dispatch(actGetProductsByCatPrefix(prefix as string));
+      dispatch(getProductsByCatPrefix(prefix as string));
 
       return () =>
       {
